@@ -57,4 +57,4 @@ bfc hello_world.bf -o hw
 * infinite cell array switch and customizable cell array length
 * customizable cell size (8-, 16- and 32-bit)
 * more natural path handling
-* play with optimizations, e.g. changing `[-]` to `mov byte[ecx], 0`
+* play with optimizations, e.g. changing `[-]` to `mov byte[ecx], 0`, currently only trivial ones are implemented (like `-++-++++` becomes `add byte[ecx], 4`)
