@@ -56,4 +56,3 @@ bfc hello_world.bf -o hw
 * WebAssembly target
 * infinite cell array switch and customizable cell array length
 * customizable cell size (8-, 16- and 32-bit)
-* more natural path handling

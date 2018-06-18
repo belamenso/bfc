@@ -14,6 +14,11 @@
     (displayln (string-append "bfc: " error-msg) (current-error-port))
     (exit 1)))
 
+(define (path->out-file-name path)
+    (let-values ([(_ name __) (split-path path)])
+          (let ([str-name (path->string name)])
+                  (substring str-name 0 (- (string-length str-name) 3)))))
+
 ;; handle command line interface
 (command-line
  #:program "bfc"
@@ -33,15 +38,15 @@
     ["x86" (target "x86")]
     [else (run-safe #f "Incorrect target (available: x86, C)")])]
  #:args (FILE)
- (if (and (regexp-match #rx".+\\.bf$" FILE)
-          (file-exists? FILE))
-     (in-file FILE)
-     (displayln "bfc: incorrect file provided" (current-error-port))))
+ (cond
+   [(not (regexp-match #rx".+\\.bf$" FILE)) (run-safe #f "File doesn't end with .bf")]
+   [(not (file-exists? FILE)) (run-safe #f "File does not exist")]
+   [else (in-file FILE)]))
 
 ;; set run parameters
 (when (not (in-file)) (exit 1))
 (when (not (out-file))
-  (out-file (substring (in-file) 0 (- (string-length (in-file)) 3))))
+  (out-file (path->out-file-name (in-file))))
 
 (when (and (only-asm?) (not (equal? (target) "x86")))
   (run-safe #f "-S available only for x86 target"))
