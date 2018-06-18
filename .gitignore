@@ -1,3 +1,4 @@
 *~
 *.bf
 !examples/*.bf
+bfc
