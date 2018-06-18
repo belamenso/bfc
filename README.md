@@ -8,8 +8,8 @@ Output is always finished with `\n\r` (so if a program produces no `\n`, it will
 Generated ELF executable is still dependant on `glibc` (mostly for `system` call to `stty`).
 ### Cool examples
 ```
-bfc -o hanoi examples/hanoi.bf # solves Hanoi tower
-bfc -o architecture examples/architecture.bf # examined size of bf cells
+bfc -o hanoi examples/hanoi.bf # draws Hanoi towers
+bfc -o architecture examples/architecture.bf # examine size of bf cells
 ```
 ## Dependencies
 - x86 target works on 32- and 64-bit Intel machines running Linux
