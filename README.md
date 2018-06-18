@@ -8,8 +8,8 @@ Output is always finished with `\n\r` (so if a program produces no `\n`, it will
 Generated ELF executable is still dependant on `glibc` (mostly for `system` call to `stty`).
 ### Cool examples
 ```
-bfc -o hanoi examples/hanoi.bf # draws Hanoi towers
-bfc -o architecture examples/architecture.bf # examine size of bf cells
+bfc examples/hanoi.bf # draws Hanoi towers
+bfc examples/architecture.bf # examine size of bf cells
 ```
 ## Dependencies
 - x86 target works on 32- and 64-bit Intel machines running Linux
@@ -30,11 +30,11 @@ bfc -o ./hw examples/hello_world.bf
 ```
 Generate only `hanoi.asm` (NASM assembly)
 ```
-bfc -S -o ./hanoi examples/hanoi.bf
+bfc -S examples/hanoi.bf
 ```
 Target C code
 ```
-bfc --target C -o 99_bottles examples/99_bottles.bf
+bfc --target C examples/99_bottles.bf
 ```
 ## Known bugs and workarounds
 ### For non-English keyboar layouts (e.g. Polish) and `zsh`
