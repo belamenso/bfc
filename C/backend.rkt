@@ -1,6 +1,7 @@
 #lang racket
 
 (require "../frontend.rkt"
+         "../parameters.rkt"
          (prefix-in c-begin. "template_begin.c")
          (prefix-in c-end. "template_end.c"))
 

@@ -1,13 +1,9 @@
 #lang racket
 
 (require "./frontend.rkt"
+         "./parameters.rkt"
          "./x86/backend.rkt"
          "./C/backend.rkt")
-
-(define in-file (make-parameter #f))
-(define out-file (make-parameter #f))
-(define only-asm? (make-parameter #f))
-(define target (make-parameter "x86"))
 
 (define (run-safe test error-msg)
   (when (not test)
@@ -37,6 +33,20 @@
     ["c" (target "c")]
     ["x86" (target "x86")]
     [else (run-safe #f "Incorrect target (available: x86, C)")])]
+ [("--cell-size" "--cs")
+  n
+  "Size in bits of a single bf cell (available: 8, 16, 32). Default size: 8"
+  (let ([n (string->number n)])
+    (if (member n '(8 16 32))
+        (cell-size n)
+        (run-safe #f "Incorrect cell size (available: 8, 16, 32)")))]
+ [("--tape-length" "--len")
+  n
+  "Size of bf cell tape. Positive integer. Default length: 30,000"
+  (let ([n (string->number n)])
+    (if ((and/c integer? positive?) n)
+        (tape-length n)
+        (run-safe #f "Tape length not a positive integer.")))]
  #:args (FILE)
  (cond
    [(not (regexp-match #rx".+\\.bf$" FILE)) (run-safe #f "File doesn't end with .bf")]
